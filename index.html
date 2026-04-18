@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hamza Siddiqui — Data Scientist</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg2: #f1f5f9;
+  --bg3: #e8edf5;
+  --card: #ffffff;
+  --border: rgba(0,0,0,0.07);
+  --border2: rgba(0,0,0,0.13);
+  --accent: #2563eb;
+  --accent2: #1d4ed8;
+  --accent-glow: rgba(37,99,235,0.1);
+  --accent-glow2: rgba(37,99,235,0.06);
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --green: #059669;
+  --green-bg: rgba(5,150,105,0.08);
+  --amber: #d97706;
+  --amber-bg: rgba(217,119,6,0.08);
+  --coral: #dc2626;
+  --coral-bg: rgba(220,38,38,0.08);
+  --purple: #7c3aed;
+  --purple-bg: rgba(124,58,237,0.08);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* Grid background */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 5%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(248,250,252,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 8px; align-items: center; }
+.nav-links a {
+  text-decoration: none;
+  color: var(--text2);
+  font-size: 13px;
+  font-weight: 400;
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+.nav-links a:hover { color: var(--text); background: var(--bg3); }
+.nav-cta {
+  background: var(--accent) !important;
+  color: #fff !important;
+  font-weight: 500 !important;
+}
+.nav-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 80px 5% 60px;
+  position: relative;
+  z-index: 1;
+}
+.hero-glow {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 60px;
+  align-items: center;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-glow);
+  border: 1px solid rgba(79,142,247,0.2);
+  color: var(--accent2);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 99px;
+  margin-bottom: 20px;
+  letter-spacing: 0.3px;
+}
+.hero-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+.hero-name {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(40px, 6vw, 68px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -2px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.hero-name span { color: var(--accent); }
+.hero-role {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-weight: 500;
+  color: var(--text2);
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+.hero-bio {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.8;
+  max-width: 480px;
+  margin-bottom: 32px;
+  font-weight: 300;
+}
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s;
+  box-shadow: 0 0 20px rgba(79,142,247,0.3);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(37,99,235,0.4); }
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--text);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid var(--border2);
+  transition: all 0.2s;
+}
+.btn-secondary:hover { background: var(--bg3); border-color: var(--accent); color: var(--accent); }
+.hero-socials { display: flex; gap: 12px; align-items: center; }
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text3);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+}
+.social-link:hover { color: var(--accent); border-color: var(--border); background: var(--bg3); }
+.social-link svg { flex-shrink: 0; }
+
+/* PHOTO CARD */
+.photo-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border2);
+  background: var(--card);
+  aspect-ratio: 3/4;
+}
+.photo-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(248,250,252,0.85) 100%);
+  z-index: 1;
+}
+.photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+.photo-badge {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 2;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.photo-badge-name { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600; }
+.photo-badge-role { font-size: 11px; color: var(--text2); }
+.open-badge {
+  background: var(--green-bg);
+  color: var(--green);
+  font-size: 10px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 99px;
+  border: 1px solid rgba(52,211,153,0.2);
+  white-space: nowrap;
+}
+
+/* SECTIONS */
+section { position: relative; z-index: 1; padding: 80px 5%; }
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.section-label::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--accent);
+}
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  color: var(--text);
+  margin-bottom: 48px;
+  line-height: 1.1;
+}
+.section-title span { color: var(--accent); }
+.max-w { max-width: 1100px; margin: 0 auto; }
+
+/* DIVIDER */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border2), transparent);
+  margin: 0 5%;
+  position: relative;
+  z-index: 1;
+}
+
+/* ABOUT */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.about-text p {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.9;
+  margin-bottom: 16px;
+  font-weight: 300;
+}
+.about-text p strong { color: var(--text); font-weight: 500; }
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.info-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  transition: border-color 0.2s;
+}
+.info-item:hover { border-color: var(--border2); }
+.info-label { font-size: 11px; color: var(--text3); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 4px; }
+.info-value { font-size: 13px; color: var(--text); font-weight: 500; word-break: break-all; }
+.info-value a { color: var(--accent); text-decoration: none; }
+.info-value a:hover { text-decoration: underline; }
+
+/* SKILLS */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.skill-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.2s;
+}
+.skill-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.skill-name { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+.skill-level { font-size: 11px; color: var(--text3); }
+.skill-bar { height: 3px; background: var(--bg3); border-radius: 99px; overflow: hidden; }
+.skill-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--accent), var(--purple)); transition: width 1s ease; }
+
+/* TOOLS */
+.tools-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+.tool-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text2);
+  font-size: 13px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+.tool-badge:hover { border-color: var(--accent); color: var(--accent); }
+.tool-dot { width: 6px; height: 6px; border-radius: 50%; }
+
+/* PROJECTS */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+  gap: 20px;
+}
+.project-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.project-card:hover { border-color: var(--border2); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+.project-card:hover::before { opacity: 1; }
+.project-num { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; color: var(--text3); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+.project-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 8px; letter-spacing: -0.5px; }
+.project-desc { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 16px; font-weight: 300; }
+.project-points { list-style: none; margin-bottom: 20px; }
+.project-points li {
+  font-size: 13px;
+  color: var(--text2);
+  padding: 4px 0;
+  padding-left: 14px;
+  position: relative;
+  font-weight: 300;
+}
+.project-points li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 11px;
+  top: 5px;
+}
+.tech-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tech-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid;
+}
+.tag-blue { background: rgba(79,142,247,0.1); color: var(--accent2); border-color: rgba(79,142,247,0.2); }
+.tag-green { background: var(--green-bg); color: var(--green); border-color: rgba(52,211,153,0.2); }
+.tag-amber { background: var(--amber-bg); color: var(--amber); border-color: rgba(251,191,36,0.2); }
+.tag-purple { background: var(--purple-bg); color: var(--purple); border-color: rgba(167,139,250,0.2); }
+.tag-coral { background: var(--coral-bg); color: var(--coral); border-color: rgba(248,113,113,0.2); }
+
+/* EDUCATION & CERT */
+.edu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.edu-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  transition: border-color 0.2s;
+}
+.edu-card:hover { border-color: var(--border2); }
+.edu-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+  font-size: 18px;
+}
+.edu-degree { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.edu-school { font-size: 13px; color: var(--text2); margin-bottom: 8px; }
+.edu-year {
+  display: inline-block;
+  font-size: 11px;
+  color: var(--accent);
+  background: var(--accent-glow);
+  border: 1px solid rgba(79,142,247,0.2);
+  padding: 3px 10px;
+  border-radius: 99px;
+}
+
+/* CONTACT */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.contact-info { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  text-decoration: none;
+  transition: all 0.2s;
+  color: var(--text);
+}
+.contact-item:hover { border-color: var(--accent); transform: translateX(4px); }
+.contact-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.c-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; }
+.c-val { font-size: 13px; color: var(--text); font-weight: 500; }
+
+/* FORM */
+.contact-form { display: flex; flex-direction: column; gap: 14px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label { font-size: 12px; color: var(--text2); font-weight: 500; letter-spacing: 0.3px; }
+.form-group input,
+.form-group textarea {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: vertical;
+}
+.form-group input:focus,
+.form-group textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow2); }
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--text3); }
+.form-submit {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(37,99,235,0.25);
+}
+.form-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,0.4); }
+
+/* FOOTER */
+footer {
+  position: relative;
+  z-index: 1;
+  padding: 32px 5%;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-brand { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; }
+.footer-brand span { color: var(--accent); }
+.footer-copy { font-size: 12px; color: var(--text3); }
+
+/* ANIMATIONS */
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text3); }
+
+@media (max-width: 768px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .photo-card { aspect-ratio: 1/1; max-width: 300px; margin: 0 auto; }
+  .about-grid, .edu-grid, .contact-grid { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">hamza<span>.</span>dev</a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#contact" class="nav-cta">Hire Me</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">Open to Work · Pune, India</div>
+      <h1 class="hero-name">Hamza<br><span>Siddiqui</span></h1>
+      <p class="hero-role">Data Scientist & ML Engineer</p>
+      <p class="hero-bio">
+        Passionate about turning raw data into real insights. I build end-to-end machine learning solutions — from data cleaning to model deployment — with a focus on business impact.
+      </p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          View Projects
+        </a>
+        <a href="#contact" class="btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Contact Me
+        </a>
+      </div>
+      <div class="hero-socials">
+        <a href="https://www.linkedin.com/in/hamza-siddiqui-990b48330" target="_blank" class="social-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/hamzasiddiqui7845" target="_blank" class="social-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+        <a href="mailto:hamzasiddiqui7845@gmail.com" class="social-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email
+        </a>
+      </div>
+    </div>
+    <div class="photo-card fade-up">
+      <img src="IMG_20260418_175857.jpg" alt="Hamza Siddiqui" style="object-position: center 15%;" onerror="this.style.display='none'; this.parentElement.style.background='#f1f5f9'; this.parentElement.innerHTML += '<div style=\'display:flex;align-items:center;justify-content:center;height:100%;font-family:Syne,sans-serif;font-size:72px;font-weight:800;color:#2563eb;\'>HS</div>'"/>
+      <div class="photo-badge">
+        <div>
+          <div class="photo-badge-name">Hamza Siddiqui</div>
+          <div class="photo-badge-role">Data Scientist</div>
+        </div>
+        <span class="open-badge">Open to Work</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="max-w">
+    <div class="section-label">About Me</div>
+    <h2 class="section-title">Who I <span>Am</span></h2>
+    <div class="about-grid">
+      <div class="about-text fade-up">
+        <p>Hi, I'm <strong>Hamza Siddiqui</strong> — a Data Science learner passionate about turning data into insights and building real-world projects.</p>
+        <p>I completed my <strong>B.Com graduation in 2026</strong> and am certified in Data Science from <strong>Datamites</strong>. I've also completed an internship at <strong>Rubix AI Solutions, Bangalore</strong>, gaining hands-on industry experience.</p>
+        <p>I specialize in the full data pipeline — from <strong>EDA and feature engineering</strong> to training and tuning <strong>ML models</strong>. My goal is to join a data-driven team where I can create real impact.</p>
+      </div>
+      <div class="info-grid fade-up">
+        <div class="info-item">
+          <div class="info-label">Location</div>
+          <div class="info-value">Pune, India</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Phone</div>
+          <div class="info-value">+91 7841884689</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Email</div>
+          <div class="info-value"><a href="mailto:hamzasiddiqui7845@gmail.com">hamzasiddiqui7845@gmail.com</a></div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">LinkedIn</div>
+          <div class="info-value"><a href="https://www.linkedin.com/in/hamza-siddiqui-990b48330" target="_blank">hamza-siddiqui</a></div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">GitHub</div>
+          <div class="info-value"><a href="https://github.com/" target="_blank">github.com/hamza</a></div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Status</div>
+          <div class="info-value" style="color:var(--green);">Open to Work ✓</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="max-w">
+    <div class="section-label">Expertise</div>
+    <h2 class="section-title">Skills & <span>Tools</span></h2>
+    <div class="skills-grid">
+      <div class="skill-card fade-up">
+        <div class="skill-name">Python <span class="skill-level">Advanced</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+      </div>
+      <div class="skill-card fade-up">
+        <div class="skill-name">SQL <span class="skill-level">Advanced</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+      </div>
+      <div class="skill-card fade-up">
+        <div class="skill-name">Machine Learning <span class="skill-level">Proficient</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+      </div>
+      <div class="skill-card fade-up">
+        <div class="skill-name">Power BI <span class="skill-level">Intermediate</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+      </div>
+      <div class="skill-card fade-up">
+        <div class="skill-name">Data Visualization <span class="skill-level">Proficient</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div>
+      </div>
+      <div class="skill-card fade-up">
+        <div class="skill-name">Excel <span class="skill-level">Intermediate</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:68%"></div></div>
+      </div>
+    </div>
+    <div class="tools-row">
+      <span class="tool-badge"><span class="tool-dot" style="background:var(--amber)"></span>Jupyter Notebook</span>
+      <span class="tool-badge"><span class="tool-dot" style="background:var(--accent)"></span>VS Code</span>
+      <span class="tool-badge"><span class="tool-dot" style="background:var(--green)"></span>Pandas</span>
+      <span class="tool-badge"><span class="tool-dot" style="background:var(--purple)"></span>Scikit-learn</span>
+      <span class="tool-badge"><span class="tool-dot" style="background:var(--coral)"></span>XGBoost</span>
+      <span class="tool-badge"><span class="tool-dot" style="background:var(--amber)"></span>Matplotlib</span>
+      <span class="tool-badge"><span class="tool-dot" style="background:var(--accent)"></span>Seaborn</span>
+      <span class="tool-badge"><span class="tool-dot" style="background:var(--green)"></span>Power BI</span>
+      <span class="tool-badge"><span class="tool-dot" style="background:var(--purple)"></span>NumPy</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="max-w">
+    <div class="section-label">Portfolio</div>
+    <h2 class="section-title">My <span>Projects</span></h2>
+    <div class="projects-grid">
+
+      <div class="project-card fade-up">
+        <div class="project-num">Project 01</div>
+        <div class="project-title">House Price Prediction</div>
+        <div class="project-desc">Regression model to accurately predict house prices using ensemble learning techniques.</div>
+        <ul class="project-points">
+          <li>Built a regression model to predict house prices</li>
+          <li>Performed data cleaning, feature engineering & model tuning</li>
+          <li>Achieved high accuracy using Random Forest ensemble models</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag tag-blue">Python</span>
+          <span class="tech-tag tag-green">Pandas</span>
+          <span class="tech-tag tag-purple">Scikit-learn</span>
+          <span class="tech-tag tag-amber">Machine Learning</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-num">Project 02</div>
+        <div class="project-title">Fraud Detection System</div>
+        <div class="project-desc">Classification model to detect fraudulent customer transactions in real-time.</div>
+        <ul class="project-points">
+          <li>Developed classification model to detect fraudulent transactions</li>
+          <li>Handled imbalanced data using SMOTE technique</li>
+          <li>Improved model performance with hyperparameter tuning</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag tag-blue">Python</span>
+          <span class="tech-tag tag-coral">XGBoost</span>
+          <span class="tech-tag tag-green">SMOTE</span>
+          <span class="tech-tag tag-amber">Machine Learning</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-num">Project 03</div>
+        <div class="project-title">Home Loan Default Prediction</div>
+        <div class="project-desc">Predictive model analyzing customer data to assess home loan default risk.</div>
+        <ul class="project-points">
+          <li>Analyzed customer data to predict loan default risk</li>
+          <li>Performed missing value treatment and outlier handling</li>
+          <li>Built multiple models and selected the best based on performance</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag tag-blue">Python</span>
+          <span class="tech-tag tag-green">Pandas</span>
+          <span class="tech-tag tag-purple">EDA</span>
+          <span class="tech-tag tag-amber">Machine Learning</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-num">Project 04</div>
+        <div class="project-title">Superstore Sales Analysis</div>
+        <div class="project-desc">End-to-end data analytics project on 4 years of US retail sales to uncover profit leakages and growth opportunities.</div>
+        <ul class="project-points">
+          <li>Analyzed 4 years of US retail sales data end-to-end</li>
+          <li>Uncovered profit leakages and regional performance gaps</li>
+          <li>Identified growth opportunities through data-driven insights</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag tag-blue">Python</span>
+          <span class="tech-tag tag-green">Power BI</span>
+          <span class="tech-tag tag-purple">EDA</span>
+          <span class="tech-tag tag-amber">Data Analytics</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="max-w">
+    <div class="section-label">Background</div>
+    <h2 class="section-title">Education & <span>Certifications</span></h2>
+    <div class="edu-grid">
+      <div class="edu-card fade-up">
+        <div class="edu-icon" style="background:var(--accent-glow)">🎓</div>
+        <div class="edu-degree">Bachelor of Commerce (B.Com)</div>
+        <div class="edu-school">Graduate · Pune, India</div>
+        <span class="edu-year">2026 Pass Out</span>
+      </div>
+      <div class="edu-card fade-up">
+        <div class="edu-icon" style="background:var(--green-bg)">📊</div>
+        <div class="edu-degree">Certified Data Science Program</div>
+        <div class="edu-school">Datamites Institute</div>
+        <span class="edu-year">Certified</span>
+      </div>
+      <div class="edu-card fade-up">
+        <div class="edu-icon" style="background:var(--amber-bg)">💼</div>
+        <div class="edu-degree">Data Science Internship</div>
+        <div class="edu-school">Rubix AI Solutions · Bangalore</div>
+        <span class="edu-year">Jun 2026</span>
+      </div>
+      <div class="edu-card fade-up" style="border-color:rgba(79,142,247,0.2); background: linear-gradient(135deg, var(--card), rgba(79,142,247,0.03));">
+        <div class="edu-icon" style="background:var(--purple-bg)">🚀</div>
+        <div class="edu-degree">Looking for Opportunities</div>
+        <div class="edu-school">Open to Data Science / ML / Analytics roles</div>
+        <span class="edu-year" style="background:var(--green-bg);color:var(--green);border-color:rgba(52,211,153,0.2)">Available Now</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="max-w">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">Contact <span>Me</span></h2>
+    <div class="contact-grid">
+      <div>
+        <p style="font-size:15px;color:var(--text2);margin-bottom:28px;font-weight:300;line-height:1.8;">
+          Interested in working together or have an opportunity to discuss? Fill the form or reach out directly — I'd love to hear from you!
+        </p>
+        <div class="contact-info">
+          <a href="mailto:hamzasiddiqui7845@gmail.com" class="contact-item">
+            <div class="contact-icon" style="background:var(--coral-bg)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--coral)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="c-label">Email</div>
+              <div class="c-val">hamzasiddiqui7845@gmail.com</div>
+            </div>
+          </a>
+          <a href="tel:+917841884689" class="contact-item">
+            <div class="contact-icon" style="background:var(--green-bg)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="c-label">Phone</div>
+              <div class="c-val">+91 7841884689</div>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/hamza-siddiqui-990b48330" target="_blank" class="contact-item">
+            <div class="contact-icon" style="background:var(--accent-glow)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--accent)"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </div>
+            <div>
+              <div class="c-label">LinkedIn</div>
+              <div class="c-val">hamza-siddiqui-990b48330</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <form class="contact-form fade-up" id="contactForm">
+        <input type="hidden" name="access_key" value="b28a100d-41f9-4e67-b7aa-878cfce41da1"/>
+        <input type="hidden" name="subject" value="New message from Hamza Portfolio"/>
+        <input type="hidden" name="from_name" value="Hamza Portfolio"/>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" name="name" placeholder="John Smith" required/>
+          </div>
+          <div class="form-group">
+            <label>Your Email</label>
+            <input type="email" name="email" placeholder="john@company.com" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" name="subject" placeholder="Job Opportunity / Collaboration"/>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea name="message" rows="5" placeholder="Hi Hamza, I'd like to discuss..." required></textarea>
+        </div>
+        <button type="submit" class="form-submit" id="submitBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Send Message
+        </button>
+        <div id="formMsg" style="display:none;margin-top:12px;padding:12px 16px;border-radius:8px;font-size:14px;font-weight:500;"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">hamza<span>.</span>dev</div>
+  <div class="footer-copy">© 2026 Hamza Siddiqui · Pune, India</div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+const form = document.getElementById('contactForm');
+const submitBtn = document.getElementById('submitBtn');
+const formMsg = document.getElementById('formMsg');
+
+form.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Sending...';
+  const data = Object.fromEntries(new FormData(form));
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const json = await res.json();
+    if (json.success) {
+      formMsg.style.display = 'block';
+      formMsg.style.background = 'var(--green-bg)';
+      formMsg.style.color = 'var(--green)';
+      formMsg.style.border = '1px solid rgba(5,150,105,0.2)';
+      formMsg.textContent = '✓ Message sent! Hamza will get back to you soon.';
+      form.reset();
+      submitBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send Message';
+      submitBtn.disabled = false;
+    } else {
+      throw new Error('Failed');
+    }
+  } catch {
+    formMsg.style.display = 'block';
+    formMsg.style.background = 'var(--coral-bg)';
+    formMsg.style.color = 'var(--coral)';
+    formMsg.style.border = '1px solid rgba(220,38,38,0.2)';
+    formMsg.textContent = '✗ Something went wrong. Please email directly at hamzasiddiqui7845@gmail.com';
+    submitBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send Message';
+    submitBtn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
